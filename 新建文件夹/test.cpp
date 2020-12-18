@@ -113,3 +113,17 @@ public:
         return pHead;
     }
 };
+//160. 相交链表
+class Solution {
+public:
+    ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+        if (!headA || !headB) return nullptr;
+        ListNode* pa = headA, * pb = headB;
+        //终止条件，pa = pb = nulllptr
+        while (pa != pb) {
+            pa = pa ? pa->next : headB;
+            pb = pb ? pb->next : headA;
+        }
+        return pb;
+    }
+};
