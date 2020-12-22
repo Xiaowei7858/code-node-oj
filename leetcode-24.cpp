@@ -33,3 +33,15 @@ public:
         return head;
     }
 };
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        //ตÝน้
+        if (!head || !head->next) return head;
+
+        ListNode* newhead = head->next;
+        head->next = swapPairs(newhead->next);
+        newhead->next = head;
+        return newhead;
+    }
+};
