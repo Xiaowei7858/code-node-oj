@@ -4,16 +4,24 @@ public:
         if (nums.size() < 3) return {};
         int len = nums.size();
         vector<vector<int>> threesum;
-        int start = 0, middle = 1, end = len - 1;
-        //记录保存二维数组的新数组的一维变量
-        int k = 0, flag = 1, prev = 0;
-        while (end >= 2) {
-            int twosum = nums[start] + nums[end];
-            while (end - start >= 1) {
-                for (int i = middle; i < end; ++i) {
-                    if (twosum + nums[i] == 0) {
-                        threesum.push_back({ nums[start],nums[middle],nums[end] });
-                    }
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < len; ++i)
+        {
+            if (nums[i] > 0) return threesum;
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int left = i + 1;
+            int right = len - 1;
+            while (left < right)
+            {
+                if (nums[left] + nums[right] > -nums[i]) right--;
+                else if (nums[left] + nums[right] < -nums[i]) left++;
+                else
+                {
+                    threesum.push_back({ nums[i],nums[left],nums[right] });
+                    left++;
+                    right--;
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right + 1]) right--;
                 }
             }
         }
