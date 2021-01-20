@@ -10,7 +10,9 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
-        if (!root) return true;
+        if (!root)
+            return true;
+
         return cmp(root, root);
     }
 
@@ -21,9 +23,9 @@ public:
         if (!p || !q)
             return false;
 
-        if (p->val == q->val)
-            return cmp(p->left, q->right) && cmp(p->right, q->left);
+        if (p->val != q->val)
+            return false;
 
-        return false;
+        return cmp(p->left, q->right) && cmp(p->right, q->left);
     }
 };
